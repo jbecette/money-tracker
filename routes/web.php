@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PagesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,17 +19,14 @@ Route::get('/', function () {
     return redirect('/dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [PagesController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/accounts', function () {
     return view('accounts');
 })->middleware(['auth', 'verified'])->name('accounts');
 
-Route::get('/transaction-types', function () {
-    return view('transaction-types');
-})->middleware(['auth', 'verified'])->name('transaction-types');
+Route::get('/transaction-types', [PagesController::class, 'transactionTypes'])->middleware(['auth', 'verified'])->name('transaction-types');
+Route::get('/transaction-types/new', [PagesController::class, 'transactionTypesAdd'])->middleware(['auth', 'verified'])->name('transaction-types_new');
 
 Route::get('/transactions', function () {
     return view('transactions');
