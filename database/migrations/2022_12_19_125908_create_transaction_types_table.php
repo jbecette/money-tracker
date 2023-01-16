@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('transaction_types', function (Blueprint $table) {
             $table->id();
             $table->string('description');
-            $table->enum('bookkeeping', array('credit', 'debit'));
+            $table->enum('bookkeeping', array('income', 'expense'));
             $table->timestamps();
         });
     }

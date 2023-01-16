@@ -19,7 +19,7 @@
                 <thead>
                     <tr>
                         <th class='w-50'>Description</th>
-                        <th class='w-25'>Debit or credit</th>
+                        <th class='w-25'>Income or expense</th>
                         <th class='w-25'>Actions</th>
                     </tr>
                 </thead>
@@ -31,9 +31,9 @@
                                 {{$item->description}}
                             </td>
                             <td>
-                                @if ($item->bookkeeping == 'debit')
+                                @if ($item->bookkeeping == 'expense')
                                     <p class="text-danger">{{ucfirst($item->bookkeeping)}}</p>
-                                @elseif ($item->bookkeeping == 'credit')
+                                @elseif ($item->bookkeeping == 'income')
                                     <p class="text-success">{{ucfirst($item->bookkeeping)}}</p>
                                 @endif
                             </td>
