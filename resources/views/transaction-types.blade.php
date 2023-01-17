@@ -13,13 +13,16 @@
 
     <div class="col-md-12">
         <div class="card">
-
+            <div class="card-header">
+                <button type="button" class="btn btn-primary float-right"><i class="fas fa-plus"></i> Add New</button>
+            </div>
             <div class="card-body p-0">
                 <table class="table">
                 <thead>
                     <tr>
-                        <th class='w-50'>Description</th>
-                        <th class='w-25'>Income or expense</th>
+                        <th>Description</th>
+                        <th>Income or Expense</th>
+                        <th>Creation Date</th>
                         <th class='w-25'>Actions</th>
                     </tr>
                 </thead>
@@ -38,10 +41,12 @@
                                 @endif
                             </td>
                             <td>
+                                {{$item->created_at}}
+                            </td>
+                            <td>
                                 <button type="button" class="btn btn-primary">Edit</button>
                                 <button type="button" class="btn btn-primary">Delete</button>
                             </td>
-
                         </tr>
                     @endforeach
 
@@ -50,7 +55,7 @@
             </div>
             <!-- /.card-body -->
             <div class="card-footer clearfix">
-                <button type="button" class="btn btn-primary float-right"><i class="fas fa-plus"></i> Add New</button>
+                {{ $transaction_types->links() }}            
             </div>
         <!-- /.card-footer -->
         </div>
