@@ -11,7 +11,7 @@
 <!-- Main content -->
 @section('content')
 {{-- Debug --}}
-{{-- <?php dump(get_defined_vars()); ?> --}}
+{{-- <?php dump($account); ?> --}}
 
 <div class="content">
     <div class="container-fluid">
@@ -21,22 +21,22 @@
                 <!-- general form elements -->
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">Add Account</h3>
+                        <h3 class="card-title">Update Account</h3>
                     </div>
                     <!-- /.card-header -->
                     
                     <!-- form start -->
-                    <form method="POST" action="{{route('accounts_new_insert')}}">
-                        @csrf
+                    <form method="POST" action="{{route('accounts_update', $account->id)}}">
+                        @csrf @method('PUT')
                         <input name="id_user" type="hidden" value="{{auth()->user()->id;}}">
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="name">Account Name</label>
-                                <input type="text" class="form-control  w-auto" id="name" name="name" placeholder="Account Name"  autofocus="autofocus">
+                                <input type="text" class="form-control  w-auto" id="name" name="name" placeholder="Account Name"  autofocus="autofocus" value="{{$account->name}}">
                             </div>
                             <div class="form-group">
                                 <label for="account_description">Description</label>
-                                <input type="text" class="form-control w-50" id="description" name="description" placeholder="Description">
+                                <input type="text" class="form-control w-50" id="description" name="description" placeholder="Description" value="{{$account->description}}">
                             </div>
                             
                         </div>

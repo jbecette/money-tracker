@@ -22,29 +22,38 @@
                 <table class="table">
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>Creation Date</th>
-                        <th class='w-25'>Actions</th>
+                        <th class="text-left">Name</th>
+                        <th class="text-left">Description</th>
+                        <th class="text-left">Creation Date</th>
+                        <th class='text-center w-25' colspan='2'>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
 
                     @foreach ($accounts as $item)
                         <tr>
-                            <td>
+                            <td class="text-left">
                                 {{$item->name}}
                             </td>
                             
-                            <td>
+                            <td class="text-left">
                                 {{$item->description}}
                             </td>
-                            <td>
+                            <td class="text-left">
                                 {{$item->created_at}}
                             </td>
-                            <td>
-                                <button type="button" class="btn btn-primary">Edit</button>
-                                <button type="button" class="btn btn-primary">Delete</button>
+                            <td class='text-center'>
+                                <a href="{{route('accounts_update', $item->id)}}">
+                                    <button type="submit" class="btn btn-primary float-right">Edit</button>
+                                </a>
+                            </td>
+                            <td class='text-center'>
+                                <form action="{{ route('accounts_delete', $item->id) }}" method="POST">
+                                    @csrf @method('DELETE')
+                                    <button type="submit" class="btn btn-primary float-left">Delete
+                                    </button>
+                                </form>
+
                             </td>
                         </tr>
                     @endforeach

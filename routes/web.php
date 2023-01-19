@@ -21,16 +21,24 @@ Route::get('/', function () {
 
 Route::get('/dashboard', [PagesController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
 
-// Route::get('/accounts', function () {
-//     return view('accounts');
-// })->middleware(['auth', 'verified'])->name('accounts');
+/* Accounts routes */
 Route::get('/accounts', [PagesController::class, 'accounts'])->middleware(['auth', 'verified'])->name('accounts');
+
 Route::get('/accounts/new', [PagesController::class, 'accountsNew'])->middleware(['auth', 'verified'])->name('accounts_new');
 Route::post('/accounts/new', [PagesController::class, 'accountsNewInsert'])->middleware(['auth', 'verified'])->name('accounts_new_insert');
 
+Route::get('/accounts/update/{id}', [PagesController::class, 'accountsUpdateView'])->middleware('auth')->name('accounts_update_form');
+Route::put('/accounts/update/{id}', [PagesController::class, 'accountUpdate'])->middleware('auth')->name('accounts_update');
+
+Route::delete('/accounts/delete/{id}', [PagesController::class, 'accountDelete'])->middleware('auth')->name('accounts_delete');
+
+
+
+/* Transaction types routes */
 Route::get('/transaction-types', [PagesController::class, 'transactionTypes'])->middleware(['auth', 'verified'])->name('transaction-types');
 Route::get('/transaction-types/new', [PagesController::class, 'transactionTypesAdd'])->middleware(['auth', 'verified'])->name('transaction-types_new');
 
+/* Transactions routes */
 Route::get('/transactions', function () {
     return view('transactions');
 })->middleware(['auth', 'verified'])->name('transactions');
