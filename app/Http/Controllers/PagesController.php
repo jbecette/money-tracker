@@ -76,4 +76,14 @@ class PagesController extends Controller
         
     }
 
+    public function transactions(){
+        
+        $user_id = auth()->user()->id;
+        $accounts = Account::where('id_user', '=', $user_id)->get();
+        return view('transactions',compact('accounts'));
+ 
+    }
+
+
+
 }

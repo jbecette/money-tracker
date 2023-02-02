@@ -7,9 +7,10 @@
 @endsection
 
 @section('content')
-    <?php 
-        // dump($transaction_types); 
-    ?>
+    {{-- @foreach ($accounts as $object)
+        {{ $object->name }}
+        <br>
+    @endforeach --}}
 
     <div class="col-md-12">
         <div class="card">

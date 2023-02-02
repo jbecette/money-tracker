@@ -31,7 +31,67 @@ class TransactionTypesSeeder extends Seeder
                     'updated_at' => Carbon::now()
                 ],
                 [
+                    'description' => 'Investments',
+                    'bookkeeping' => 'income',
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now()
+                ],
+                [
+                    'description' => 'Others',
+                    'bookkeeping' => 'income',
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now()
+                ],
+                [
                     'description' => 'Rent',
+                    'bookkeeping' => 'expense',
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now()
+                ],
+                [
+                    'description' => 'Mortgage',
+                    'bookkeeping' => 'expense',
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now()
+                ],
+                [
+                    'description' => 'Food',
+                    'bookkeeping' => 'expense',
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now()
+                ],
+                [
+                    'description' => 'Clothing',
+                    'bookkeeping' => 'expense',
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now()
+                ],
+                [
+                    'description' => 'Entertainment',
+                    'bookkeeping' => 'expense',
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now()
+                ],
+                [
+                    'description' => 'Internet',
+                    'bookkeeping' => 'expense',
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now()
+                ],
+                [
+                    'description' => 'Cell Phone',
+                    'bookkeeping' => 'expense',
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now()
+                ],
+                [
+                    'description' => 'Health',
+                    'bookkeeping' => 'expense',
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now()
+                ],
+                [
+                    'description' => 'Others',
                     'bookkeeping' => 'expense',
                     'created_at' => Carbon::now(),
                     'updated_at' => Carbon::now()

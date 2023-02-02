@@ -314,12 +314,12 @@ return [
             'icon'        => 'far fa-fw fa-file',
             'label_color' => 'success',
         ],
-        [
-            'text'        => 'Transaction Types',
-            'url'         => '/transaction-types',
-            'icon'        => 'far fa-fw fa-file',
-            'label_color' => 'success',
-        ],
+        // [
+        //     'text'        => 'Transaction Types',
+        //     'url'         => '/transaction-types',
+        //     'icon'        => 'far fa-fw fa-file',
+        //     'label_color' => 'success',
+        // ],
 
         ['header' => 'account_settings'],
         [

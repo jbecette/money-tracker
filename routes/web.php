@@ -33,15 +33,15 @@ Route::put('/accounts/update/{id}', [PagesController::class, 'accountUpdate'])->
 Route::delete('/accounts/delete/{id}', [PagesController::class, 'accountDelete'])->middleware('auth')->name('accounts_delete');
 
 
-
 /* Transaction types routes */
 Route::get('/transaction-types', [PagesController::class, 'transactionTypes'])->middleware(['auth', 'verified'])->name('transaction-types');
 Route::get('/transaction-types/new', [PagesController::class, 'transactionTypesAdd'])->middleware(['auth', 'verified'])->name('transaction-types_new');
 
 /* Transactions routes */
-Route::get('/transactions', function () {
-    return view('transactions');
-})->middleware(['auth', 'verified'])->name('transactions');
+// Route::get('/transactions', function () {
+//     return view('transactions');
+// })->middleware(['auth', 'verified'])->name('transactions');
+Route::get('/transactions', [PagesController::class, 'transactions'])->middleware(['auth', 'verified'])->name('transactions');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
