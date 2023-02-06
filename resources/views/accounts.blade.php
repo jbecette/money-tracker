@@ -25,7 +25,8 @@
                     <tr>
                         <th class="text-left">Name</th>
                         <th class="text-left">Description</th>
-                        <th class="text-left">Creation Date</th>
+                        <th class="text-left">Created</th>
+                        <th class="text-left">Updated</th>
                         <th class='text-center w-25' colspan='2'>Actions</th>
                     </tr>
                 </thead>
@@ -42,6 +43,9 @@
                             </td>
                             <td class="text-left">
                                 {{$item->created_at}}
+                            </td>
+                            <td class="text-left">
+                                {{$item->updated_at}}
                             </td>
                             <td class='text-center'>
                                 <a href="{{route('accounts_update', $item->id)}}">

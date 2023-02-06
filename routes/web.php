@@ -41,7 +41,12 @@ Route::get('/transaction-types/new', [PagesController::class, 'transactionTypesA
 // Route::get('/transactions', function () {
 //     return view('transactions');
 // })->middleware(['auth', 'verified'])->name('transactions');
-Route::get('/transactions', [PagesController::class, 'transactions'])->middleware(['auth', 'verified'])->name('transactions');
+
+Route::get('/transactions/{id?}', [PagesController::class, 'transactions'])->middleware(['auth', 'verified'])->where('id','[0-9]+')->name('transactions');
+
+Route::get('/transactions/new', [PagesController::class, 'transactionsNew'])->middleware(['auth', 'verified'])->name('transactions_new');
+
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

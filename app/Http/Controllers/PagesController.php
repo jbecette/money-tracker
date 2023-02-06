@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\TransactionType;
 use App\Models\Account;
+use App\Models\Transaction;
 use App\Http\Requests\AccountAddRequest;
 use App\Http\Requests\AccountUpdateRequest;
+use Illuminate\Support\Facades\DB;
 
 class PagesController extends Controller
 {
@@ -76,14 +78,60 @@ class PagesController extends Controller
         
     }
 
-    public function transactions(){
+    public function transactions($id = null){
         
         $user_id = auth()->user()->id;
+        
+        // User's accounts for selector
         $accounts = Account::where('id_user', '=', $user_id)->get();
-        return view('transactions',compact('accounts'));
- 
+        
+        // If an account has been received, get all transactions and balance
+        if ($id != null) {
+            
+            // Transactions
+            $transactions = DB::table('transactions')
+                            -> select('transactions.id', 
+                                      'transaction_types.description AS transaction_type',
+                                      'transactions.amount',
+                                      'transactions.comments',
+                                      'transaction_types.bookkeeping',
+                                      'transactions.created_at',
+                                      'transactions.updated_at')
+                            -> leftJoin('transaction_types','transaction_types.id','=','transactions.id_transaction_type')
+                            -> leftJoin('accounts','accounts.id','=','transactions.id_account')
+                            -> where([
+                                     ['transactions.id_account', '=', $id],
+                                     ['accounts.id_user', '=', $user_id] // Users can only see their own accounts transactions
+                                     ])
+                            -> orderByDesc('transactions.created_at')
+                            -> paginate(8);
+
+            // Balance
+            $account_balance = DB::table('transactions')
+                               -> select(DB::raw('SUM(amount) as balance'))
+                               -> leftJoin('transaction_types','transaction_types.id','=','transactions.id_transaction_type')
+                               -> leftJoin('accounts','accounts.id','=','transactions.id_account')
+                               -> where([
+                                        ['transactions.id_account', '=', $id],
+                                        ['accounts.id_user', '=', $user_id] // Users can only see their own accounts transactions
+                                        ])
+                               -> get();
+
+            return view('transactions',compact('accounts','transactions','account_balance'));
+            
+        } else {
+
+            // No account in particular has been received, we just pass the user's accounts
+            return view('transactions',compact('accounts'));
+
+        }
+        
     }
 
+    public function transactionsNew(){
 
+        return view('transactions_new');
+        // return('Call New Transaction View');
+    }
 
 }
