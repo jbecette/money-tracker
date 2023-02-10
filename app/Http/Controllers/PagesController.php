@@ -130,8 +130,38 @@ class PagesController extends Controller
 
     public function transactionsNew(){
 
-        return view('transactions_new');
-        // return('Call New Transaction View');
+        $user_id = auth()->user()->id;
+        
+        // User's accounts for selector
+        $accounts = Account::where('id_user', '=', $user_id)->get();
+        
+        $transaction_types = TransactionType::get();
+        
+        return view('transactions_new',compact('transaction_types','accounts'));
+    }
+
+    public function transactionsNewInsert(){
+
+        // Amount format for insertion
+        $amount = str_replace("$ ","",request('amount'));
+        $amount = str_replace(",","",$amount);
+
+        // If it's an expense, we save it with a negative sign
+        if (request('transaction-type-radio') == 'expense') {
+            $amount = $amount * -1;
+        }
+        
+        $id_account = request('id_account');
+
+        Transaction::create([
+            'id_account' => $id_account,
+            'id_transaction_type' => request('id_transaction_type'),
+            'amount' => $amount,
+            'comments' => request('comments'),
+        ]);
+
+        return redirect(route('transactions',$id_account));
+
     }
 
 }

@@ -32,11 +32,11 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="name">Account Name</label>
-                                <input type="text" class="form-control  w-auto" id="name" name="name" placeholder="Account Name"  autofocus="autofocus">
+                                <input type="text" class="form-control  w-auto ml-2" id="name" name="name" placeholder="Account Name"  autofocus="autofocus">
                             </div>
                             <div class="form-group">
                                 <label for="account_description">Description</label>
-                                <input type="text" class="form-control w-50" id="description" name="description" placeholder="Description">
+                                <input type="text" class="form-control w-50 ml-2" id="description" name="description" placeholder="Description">
                             </div>
                             
                         </div>

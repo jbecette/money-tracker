@@ -30,7 +30,7 @@
                 <div class="row">
                     <div class="col-md-4">
                         <label>Account</label>
-                        <select class="custom-select rounded-0" onchange="window.location.href=this.options[this.selectedIndex].value;">
+                        <select class="custom-select rounded-0 ml-2" onchange="window.location.href=this.options[this.selectedIndex].value;">
                             <option value=""><i> - Please choose an account -</i></option>
                             @foreach ($accounts as $item)
                             <option value="{{route('transactions',$item->id)}}" 

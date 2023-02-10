@@ -439,6 +439,16 @@ return [
                 ],
             ],
         ],
+        'maskMoney' => [
+            'active' => false,
+            'files' => [
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js',
+                ],
+            ],
+        ],
     ],
 
     /*
