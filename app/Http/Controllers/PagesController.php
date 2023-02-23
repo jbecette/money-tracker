@@ -8,6 +8,7 @@ use App\Models\Account;
 use App\Models\Transaction;
 use App\Http\Requests\AccountAddRequest;
 use App\Http\Requests\AccountUpdateRequest;
+use App\Http\Requests\TransactionAddRequest;
 use Illuminate\Support\Facades\DB;
 
 class PagesController extends Controller
@@ -74,7 +75,7 @@ class PagesController extends Controller
         $account_delete = Account::findOrFail($id);
         $account_delete->delete();
         
-        return redirect(route('accounts')); 
+        return redirect(route('accounts'));
         
     }
 
@@ -140,28 +141,57 @@ class PagesController extends Controller
         return view('transactions_new',compact('transaction_types','accounts'));
     }
 
-    public function transactionsNewInsert(){
+    public function transactionsNewInsert(TransactionAddRequest $request){
 
-        // Amount format for insertion
-        $amount = str_replace("$ ","",request('amount'));
-        $amount = str_replace(",","",$amount);
-
-        // If it's an expense, we save it with a negative sign
-        if (request('transaction-type-radio') == 'expense') {
-            $amount = $amount * -1;
-        }
-        
         $id_account = request('id_account');
 
-        Transaction::create([
-            'id_account' => $id_account,
-            'id_transaction_type' => request('id_transaction_type'),
-            'amount' => $amount,
-            'comments' => request('comments'),
-        ]);
+        Transaction::create($request->validated());
 
         return redirect(route('transactions',$id_account));
 
+    }
+
+    public function transactionDelete($id) {
+
+        $transaction_delete = Transaction::findOrFail($id);
+        $id_account = $transaction_delete->id_account;
+        
+        $transaction_delete->delete();
+        
+        return redirect(route('transactions',$id_account));
+
+    }
+
+    public function transactionsUpdateView($id) {
+        $user_id = auth()->user()->id;
+
+        // Get and pass to the view the user's accounts, transaction types and transaction to update
+        $accounts = Account::where('id_user', '=', $user_id)
+                            -> orderByDesc('description')
+                            -> get();
+
+        $transaction_types = TransactionType::get();
+                            
+        $transaction = DB::table('transactions')
+                       -> select('transactions.id',
+                                 'transactions.id_account',
+                                 'transactions.id_transaction_type',
+                                 'transaction_types.bookkeeping',
+                                 'transaction_types.description AS transaction_type_description',
+                                 'transactions.amount',
+                                 'transactions.comments',
+                                 'transactions.created_at',
+                                 'transactions.updated_at')
+                       -> leftJoin('transaction_types','transaction_types.id','=','transactions.id_transaction_type')          
+                       -> where([
+                                    ['transactions.id', '=', $id]
+                                ])
+                       ->first();
+
+        $formatted_amount = "$".' '.number_format(ABS($transaction->amount),2);
+
+        return view('transaction_update_form',compact('accounts','transaction_types','transaction','formatted_amount'));
+        
     }
 
 }

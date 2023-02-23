@@ -40,7 +40,7 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="col-md-5 d-flex align-items-end justify-content-start">
+                    <div class="col-md-5 d-flex align-items-end justify-content-start ">
                         <h5>Balance:&nbsp; </h5>
                         @if (isset($account_balance))
                             <h5 class='
@@ -89,22 +89,14 @@
                                     {{ $transaction->transaction_type }}
                                 </td>
                                 <td class="text-right">
-                                    
-                                    {{-- <span class='
-                                    @if ($transaction->bookkeeping == 'expense') -
-                                    @endif
-                                    $ {{ number_format($transaction->amount, 2); }}
-                                    </span>
-                                     --}}
-
                                     <span class='
-                                    @if ($transaction->bookkeeping == 'expense')
-                                        text-danger'> - $
-                                    @else
-                                        text-success'> + $
-                                    @endif
+                                        @if ($transaction->bookkeeping == 'expense')
+                                            text-danger'> - $
+                                        @else
+                                            text-success'> + $
+                                        @endif
 
-                                     {{ number_format(ABS($transaction->amount), 2); }}
+                                        {{ number_format(ABS($transaction->amount), 2); }}
                                      </span>
                                 </td>
                                 <td class="text-left">
@@ -121,27 +113,22 @@
                                     @endif
                                 </td>
                                 <td class='text-center'>
-                                    {{-- <a href="{{route('accounts_update', $item->id)}}"> --}}
-                                    <a href="#">
+                                    <a href="{{route('transactions_update_form', $transaction->id)}}">
                                         <button type="submit" class="btn btn-primary float-right">Edit</button>
                                     </a>
                                 </td>
                                 <td class='text-center'>
-                                    {{-- <form action="{{ route('accounts_delete', $item->id) }}" method="POST"> --}}
+                                    <form action="{{ route('transaction_delete', $transaction->id) }}" method="POST">
                                         @csrf @method('DELETE')
                                         <button type="submit" class="btn btn-primary float-left">Delete
                                         </button>
-                                    {{-- </form> --}}
+                                    </form>
     
                                 </td>
                             </tr>
                             
                         @endforeach
                     @endif
-
-                    {{-- @foreach ($accounts as $item) --}}
-                        
-                    {{-- @endforeach --}}
 
                 </tbody>
                 </table>

@@ -48,7 +48,7 @@
                                 {{$item->updated_at}}
                             </td>
                             <td class='text-center'>
-                                <a href="{{route('accounts_update', $item->id)}}">
+                                <a href="{{route('accounts_update_form', $item->id)}}">
                                     <button type="submit" class="btn btn-primary float-right">Edit</button>
                                 </a>
                             </td>
