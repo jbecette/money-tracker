@@ -29,8 +29,8 @@
                         <!-- /.card-header -->
                         
                         <!-- form start -->
-                        <form method="POST" action="{{route('transactions_new_insert')}}">
-                            @csrf
+                        <form method="POST" action="{{route('transaction_update', $transaction->id)}}">
+                            @csrf @method('PUT')
                             <input name="id_user" type="hidden" value="{{auth()->user()->id;}}">
                             <div class="card-body">
                                 <div class="form-group">

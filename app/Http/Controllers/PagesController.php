@@ -9,6 +9,7 @@ use App\Models\Transaction;
 use App\Http\Requests\AccountAddRequest;
 use App\Http\Requests\AccountUpdateRequest;
 use App\Http\Requests\TransactionAddRequest;
+use App\Http\Requests\TransactionUpdateRequest;
 use Illuminate\Support\Facades\DB;
 
 class PagesController extends Controller
@@ -192,6 +193,24 @@ class PagesController extends Controller
 
         return view('transaction_update_form',compact('accounts','transaction_types','transaction','formatted_amount'));
         
+    }
+
+    public function transactionUpdate(TransactionUpdateRequest $request, $id){
+        
+        // echo $id;
+        // echo json_encode($request, JSON_PRETTY_PRINT);
+        // echo $request->comments;
+
+        $transaction_update = Transaction::findOrFail($id);
+        $transaction_update->id_account = $request->id_account;
+        $transaction_update->id_transaction_type = $request->id_transaction_type;
+        $transaction_update->amount = $request->amount;
+        $transaction_update->comments = $request->comments;
+        $transaction_update->save();
+       
+        return redirect(route('transactions',$request->id_account));
+
+
     }
 
 }

@@ -38,7 +38,7 @@ Route::get('/transactions/{id?}', [PagesController::class, 'transactions'])->mid
 Route::get('/transactions/new', [PagesController::class, 'transactionsNew'])->middleware(['auth', 'verified'])->name('transactions_new');
 Route::post('/transactions/new', [PagesController::class, 'transactionsNewInsert'])->middleware(['auth', 'verified'])->name('transactions_new_insert');
 Route::get('/transactions/update/{id}', [PagesController::class, 'transactionsUpdateView'])->middleware('auth')->name('transactions_update_form');
-// Route::put('/accounts/update/{id}', [PagesController::class, 'accountUpdate'])->middleware('auth')->name('accounts_update');
+Route::put('/transactions/update/{id}', [PagesController::class, 'transactionUpdate'])->middleware('auth')->name('transaction_update');
 Route::delete('/transactions/delete/{id}', [PagesController::class, 'transactionDelete'])->middleware('auth')->name('transaction_delete');
 
 
