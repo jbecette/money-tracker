@@ -296,12 +296,12 @@ return [
         ],
 
         // Sidebar items:
-        [
-            'text'        => 'Dashboard',
-            'url'         => '/dashboard',
-            'icon'        => 'far fa-fw fa-file',
-            'label_color' => 'success',
-        ],
+        // [
+        //     'text'        => 'Dashboard',
+        //     'url'         => '/dashboard',
+        //     'icon'        => 'far fa-fw fa-file',
+        //     'label_color' => 'success',
+        // ],
         [
             'text'        => 'Transactions',
             'url'         => '/transactions',

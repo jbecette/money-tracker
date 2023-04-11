@@ -16,8 +16,8 @@ use App\Http\Controllers\PagesController;
 */
 
 Route::get('/', function () {
-    return redirect('/dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+    return redirect('/accounts');
+})->middleware(['auth', 'verified'])->name('home');
 
 Route::get('/dashboard', [PagesController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
 

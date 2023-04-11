@@ -1,66 +1,121 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Money Tracker
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A simple finance tracker app made with [Laravel](https://laravel.com/) + [AdminLTE](https://adminlte.io/themes/v3/), using [Jeroennoten's](https://github.com/jeroennoten/Laravel-AdminLTE) package.
 
-## About Laravel
+![Money Tracker Screenshot](images/money-tracker-sample.png?raw=true "Money Tracker")
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Prerequisites
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+* Apache
+* PHP 7.4.33 or newer
+* MySQL 8
+* Composer
+* npm
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## How to setup the project locally
 
-## Learning Laravel
+1) Clone the project
+```
+git clone https://github.com/jbecette/money-tracker
+```
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+2) Move into the project's directory and install the Composer dependencies
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+```bash
+cd money-tracker
+composer install
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+3) Install Node dependencies
 
-## Laravel Sponsors
+```bash
+npm install
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+4) Create the .env file, copying it from the example
 
-### Premium Partners
+```bash
+cp .env.example .env
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+5) Generate the app's encryption key
 
-## Contributing
+```bash
+php artisan key:generate
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+6) Create an empty MySQL database
 
-## Code of Conduct
+```mysql
+CREATE DATABASE IF NOT EXISTS `money-tracker`
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+7) Edit the .env file with the database reference and credentials.
 
-## Security Vulnerabilities
+For example:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```php
+	DB_HOST=127.0.0.1
+	DB_PORT=3306
+	DB_DATABASE=money-tracker
+	DB_USERNAME=root
+	DB_PASSWORD=
+```
 
-## License
+8) Run migrations
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```bash
+php artisan migrate
+```
+
+9) Run seeds
+
+```bash
+php artisan db:seed
+```
+
+10) Run the project locally
+
+```bash
+php artisan serve
+```
+This should allow us to reach the project at http://127.0.0.1:8000/
+
+In order to login, first we must create a user following the **Register a new membership** link.
+
+## Usage
+
+In this app you'll be able to create **accounts**, register **transactions** for them (**income** and **expenses**), and get a **balance**.
+
+Each registered user will have their own accounts and transactions, and will not be able to see another user's.
+
+### Creating an account
+
+  * Go to the **Accounts** section by clicking the option in the left sidebar.
+  * Press the **Add New** button on top of the grid.
+  * Enter an **Account Name** and a short **description**
+  * Press **Submit**.
+
+![Creating an account](images/money-tracker-create-account.gif?raw=true "Creating an account")
+ 
+ ### Inserting transactions
+
+* Go to the **Transactions** section by clicking the option in the left sidebar.
+* Select an account.
+* Press the **Add New** button on top of the grid.
+* Choose a **Transaction Type** (**income** or **expense**)
+* Select a **Transaction Description** from the combo below (it will update automatically with some predefined options, based on the transaction type selected).
+* Enter an **amount** and an optional **comment**.
+* Press **Submit**.
+
+The transaction will be inserted and we'll return to the transactions grid. The **balance** will be updated automatically by summing all transactions:
+
+![Inserting a transaction](images/money-tracker-insert-transaction.gif?raw=true "Inserting a transaction")
+
+Accounts and transactions can be edited at any time. If the transaction's amount is edited, the balance will be updated accordingly.
+
+## FAQ
+
+> How do I insert new transaction descriptions?
+
+Add them in the transaction types seeder (TransactionTypesSeeder.php).
