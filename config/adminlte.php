@@ -307,12 +307,14 @@ return [
             'url'         => '/transactions',
             'icon'        => 'far fa-fw fa-file',
             'label_color' => 'success',
+            'active'      => ['transactions', 'transactions*']
         ],
         [
             'text'        => 'Accounts',
             'url'         => '/accounts',
             'icon'        => 'far fa-fw fa-file',
             'label_color' => 'success',
+            'active'      => ['accounts', 'accounts*']
         ],
         // [
         //     'text'        => 'Transaction Types',

@@ -55,11 +55,11 @@ CREATE DATABASE IF NOT EXISTS `money-tracker`
 For example:
 
 ```php
-	DB_HOST=127.0.0.1
-	DB_PORT=3306
-	DB_DATABASE=money-tracker
-	DB_USERNAME=root
-	DB_PASSWORD=
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=money-tracker
+DB_USERNAME=root
+DB_PASSWORD=
 ```
 
 8) Run migrations
